@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_214504) do
+ActiveRecord::Schema.define(version: 2020_02_04_224833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,22 @@ ActiveRecord::Schema.define(version: 2020_02_04_214504) do
     t.integer "number_of_chairs"
   end
 
+  create_table "postal_codes", force: :cascade do |t|
+    t.string "post_code"
+    t.bigint "restaurant_id"
+    t.index ["restaurant_id"], name: "index_postal_codes_on_restaurant_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "post_code"
     t.integer "number_of_chairs"
     t.string "category"
+    t.bigint "postal_code_id"
+    t.index ["postal_code_id"], name: "index_restaurants_on_postal_code_id"
   end
 
+  add_foreign_key "postal_codes", "restaurants"
+  add_foreign_key "restaurants", "postal_codes"
 end
