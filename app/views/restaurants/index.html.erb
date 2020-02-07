@@ -1,0 +1,22 @@
+<h1>Restaurant/Cafe Post Codes</h1>
+
+<h3>Post Code</h3>
+<% @restaurants.each do |r| %>
+  <%= r.post_code %> </br>
+<% end %>
+
+<h3>Total Restaurants/cafes</h3>
+<% @postals.each do |p| %>
+  <%= p.restaurants.count %> </br>
+<% end %>
+
+<h3>Total chairs</h3>
+<% @postals.each do |p| %>
+  <%= p.total_chairs %> </br>
+<% end %>
+
+<h3>Chairs Percentage</h3>
+  <% binding.pry %>
+  (<% @postals.each do |p| %>
+    <%= p.total_chairs / (@restaurants.sum{|x| x.number_of_chairs}) %>
+  <% end %>)
