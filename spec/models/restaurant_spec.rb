@@ -8,4 +8,8 @@ describe Restaurant, type: :model do
     it { should validate_numericality_of(:number_of_chairs)}
     it { should validate_presence_of(:category)}
   end
+
+  describe "Relationships" do
+    it { should belong_to (:postal_code)}
+  end
 end
